@@ -19,13 +19,40 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="FN7-05-dEP">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noteCell" rowHeight="60" id="FN7-05-dEP" customClass="NoteCell" customModule="SecureNotes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FN7-05-dEP" id="W7P-Sn-23y">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lockImage" translatesAutoresizingMaskIntoConstraints="NO" id="pYF-1B-OvJ">
+                                                    <rect key="frame" x="345" y="10" width="22" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="22" id="1AP-Jr-PO1"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNR-MM-qKL">
+                                                    <rect key="frame" x="20" y="8" width="315" height="44"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pYF-1B-OvJ" firstAttribute="leading" secondItem="CNR-MM-qKL" secondAttribute="trailing" constant="10" id="DLN-j4-Xgo"/>
+                                                <constraint firstAttribute="bottom" secondItem="pYF-1B-OvJ" secondAttribute="bottom" constant="10" id="KGx-rl-sP9"/>
+                                                <constraint firstItem="pYF-1B-OvJ" firstAttribute="top" secondItem="W7P-Sn-23y" secondAttribute="top" constant="10" id="Unq-Nj-7WS"/>
+                                                <constraint firstAttribute="trailing" secondItem="pYF-1B-OvJ" secondAttribute="trailing" constant="8" id="W9r-sM-Nve"/>
+                                                <constraint firstAttribute="bottom" secondItem="CNR-MM-qKL" secondAttribute="bottom" constant="8" id="hHn-kf-gPi"/>
+                                                <constraint firstItem="CNR-MM-qKL" firstAttribute="top" secondItem="W7P-Sn-23y" secondAttribute="top" constant="8" id="omm-uS-nLc"/>
+                                                <constraint firstItem="CNR-MM-qKL" firstAttribute="leading" secondItem="W7P-Sn-23y" secondAttribute="leading" constant="20" id="yzd-rS-So8"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="lockImageView" destination="pYF-1B-OvJ" id="TPx-9o-fIb"/>
+                                            <outlet property="messageLbl" destination="CNR-MM-qKL" id="8Ye-VF-Wjm"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -40,6 +67,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="SecureNotes" id="ZzL-Uy-iMN">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="nZW-og-Kef"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="mUg-HM-spM">
                             <color key="tintColor" red="0.91764705879999997" green="0.66274509800000003" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
@@ -52,15 +80,67 @@
             </objects>
             <point key="canvasLocation" x="1071.2" y="138.98050974512745"/>
         </scene>
+        <!--Note DetailVC-->
+        <scene sceneID="Pch-d1-84J">
+            <objects>
+                <viewController storyboardIdentifier="NoteDetailVC" modalPresentationStyle="fullScreen" id="ORm-6a-kkr" customClass="NoteDetailVC" customModule="SecureNotes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MnG-QQ-kIC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwi-M4-YpJ">
+                                <rect key="frame" x="20" y="607" width="335" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="mEX-kw-YJ8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
+                                <state key="normal" title="LOCK NOTE">
+                                    <color key="titleColor" red="0.91764705879999997" green="0.66274509800000003" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="lockNoteBtnWasPressed:" destination="ORm-6a-kkr" eventType="touchUpInside" id="53l-Nr-XGz"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qNp-dU-cva">
+                                <rect key="frame" x="20" y="0.0" width="335" height="587"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="jfC-Du-Htt" firstAttribute="trailing" secondItem="qNp-dU-cva" secondAttribute="trailing" constant="20" id="0m8-OK-Nof"/>
+                            <constraint firstItem="jwi-M4-YpJ" firstAttribute="top" secondItem="qNp-dU-cva" secondAttribute="bottom" constant="20" id="DBi-bn-YuK"/>
+                            <constraint firstItem="qNp-dU-cva" firstAttribute="leading" secondItem="jfC-Du-Htt" secondAttribute="leading" constant="20" id="F3q-Ec-5e9"/>
+                            <constraint firstItem="jfC-Du-Htt" firstAttribute="trailing" secondItem="jwi-M4-YpJ" secondAttribute="trailing" constant="20" id="Y40-Zv-T42"/>
+                            <constraint firstItem="jfC-Du-Htt" firstAttribute="bottom" secondItem="jwi-M4-YpJ" secondAttribute="bottom" constant="20" id="cvk-GL-8fe"/>
+                            <constraint firstItem="jwi-M4-YpJ" firstAttribute="leading" secondItem="jfC-Du-Htt" secondAttribute="leading" constant="20" id="hCF-nb-A44"/>
+                            <constraint firstItem="qNp-dU-cva" firstAttribute="top" secondItem="jfC-Du-Htt" secondAttribute="top" id="kH6-jm-t2w"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jfC-Du-Htt"/>
+                    </view>
+                    <connections>
+                        <outlet property="noteTextView" destination="qNp-dU-cva" id="wlA-1O-MSB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dMC-ss-nD6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1773.5999999999999" y="138.98050974512745"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="RfM-bf-2uS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NAN-Vj-9oJ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ION-MW-wmh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" backIndicatorImage="Back" id="ION-MW-wmh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.91764705879999997" green="0.66274509800000003" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                             <color key="textColor" red="0.91764705879999997" green="0.66274509800000003" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
@@ -77,4 +157,8 @@
             <point key="canvasLocation" x="132" y="138.98050974512745"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Back" width="16" height="16"/>
+        <image name="lockImage" width="30" height="30"/>
+    </resources>
 </document>

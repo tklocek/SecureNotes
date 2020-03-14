@@ -10,6 +10,9 @@
 		70F6AA3D2418E7B400DC16BF /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F6AA3C2418E7B400DC16BF /* Note.swift */; };
 		70F6AA3F2418E80B00DC16BF /* LockStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F6AA3E2418E80B00DC16BF /* LockStatus.swift */; };
 		70F6AA412418E87D00DC16BF /* NoteObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F6AA402418E87D00DC16BF /* NoteObjects.swift */; };
+		70F6AA432418ED6500DC16BF /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F6AA422418ED6500DC16BF /* NoteCell.swift */; };
+		70F6AA4524198A0E00DC16BF /* NoteDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F6AA4424198A0E00DC16BF /* NoteDetailVC.swift */; };
+		70F6AA47241D8BAC00DC16BF /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F6AA46241D8BAC00DC16BF /* Helpers.swift */; };
 		70F8959724182E1900CA0576 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F8959624182E1900CA0576 /* AppDelegate.swift */; };
 		70F8959924182E1900CA0576 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F8959824182E1900CA0576 /* SceneDelegate.swift */; };
 		70F8959B24182E1900CA0576 /* NoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F8959A24182E1900CA0576 /* NoteVC.swift */; };
@@ -22,6 +25,9 @@
 		70F6AA3C2418E7B400DC16BF /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		70F6AA3E2418E80B00DC16BF /* LockStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockStatus.swift; sourceTree = "<group>"; };
 		70F6AA402418E87D00DC16BF /* NoteObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteObjects.swift; sourceTree = "<group>"; };
+		70F6AA422418ED6500DC16BF /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		70F6AA4424198A0E00DC16BF /* NoteDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailVC.swift; sourceTree = "<group>"; };
+		70F6AA46241D8BAC00DC16BF /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		70F8959324182E1900CA0576 /* SecureNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecureNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70F8959624182E1900CA0576 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70F8959824182E1900CA0576 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				70F8959A24182E1900CA0576 /* NoteVC.swift */,
+				70F6AA4424198A0E00DC16BF /* NoteDetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -88,6 +95,7 @@
 		70F895AB24182E4200CA0576 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				70F6AA422418ED6500DC16BF /* NoteCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -104,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				70F6AA402418E87D00DC16BF /* NoteObjects.swift */,
+				70F6AA46241D8BAC00DC16BF /* Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -191,8 +200,11 @@
 				70F8959B24182E1900CA0576 /* NoteVC.swift in Sources */,
 				70F8959724182E1900CA0576 /* AppDelegate.swift in Sources */,
 				70F6AA3F2418E80B00DC16BF /* LockStatus.swift in Sources */,
+				70F6AA47241D8BAC00DC16BF /* Helpers.swift in Sources */,
 				70F8959924182E1900CA0576 /* SceneDelegate.swift in Sources */,
+				70F6AA432418ED6500DC16BF /* NoteCell.swift in Sources */,
 				70F6AA3D2418E7B400DC16BF /* Note.swift in Sources */,
+				70F6AA4524198A0E00DC16BF /* NoteDetailVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
