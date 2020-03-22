@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import LocalAuthentication
+
 
 class NoteVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -46,7 +48,19 @@ class NoteVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        pushNoteFor(indexPath: indexPath)
+        if notesArray[indexPath.row].lockStatus == .locked {
+            authenticateBiometrics { (authenticated) in
+                if authenticated {
+                    let lockStatus = notesArray[indexPath.row].lockStatus
+                    notesArray[indexPath.row].lockStatus = lockStatusFlipper(lockStatus)
+                    DispatchQueue.main.async {
+                        self.pushNoteFor(indexPath: indexPath)
+                    }
+                }
+            }
+        } else {
+            pushNoteFor(indexPath: indexPath)
+        }
         
     }
     
@@ -56,6 +70,49 @@ class NoteVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         noteDetailVC.index = indexPath.row
         navigationController?.pushViewController(noteDetailVC, animated: true)
         
+    }
+    
+    func authenticateBiometrics(completion: @escaping (Bool) -> Void) {
+        let myContex = LAContext()
+        let myLocalizedReasonString = "Our app uses Touch ID / Face ID to secure your notes."
+        var authError : NSError?
+        
+        if #available(iOS 8.0, macOS 10.12.1, *) {
+            if myContex.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
+                myContex.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: myLocalizedReasonString) { (success, evaluateError) in
+                    if success {
+                        // User authenticated successfully, take appropriate action
+                        completion(true)
+                    } else {
+                         // User did not authenticate successfully, look at error and take appropriate action
+                        guard let evaluateErrorString = evaluateError?.localizedDescription else { return }
+                        
+                        DispatchQueue.main.async {
+                            self.showAlert(withMessage: evaluateErrorString)
+                        }
+                        completion(false)
+                    }
+                }
+            } else {
+                // Could not evaluate policy; look at authError and present an appropriate message to user
+                guard let authErrorString = authError?.localizedDescription else { return }
+                self.showAlert(withMessage: authErrorString)
+                completion(false)
+            }
+        } else {
+            // Fallback on earlier versions
+            completion(false)
+        }
+        
+        
+        
+    }
+    
+    func showAlert(withMessage message: String) {
+        let alertVC = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertVC.addAction(action)
+        present(alertVC, animated: true, completion: nil)
     }
     
 }
